@@ -3,50 +3,43 @@
 
         public function index(){
             
-            $this->load->model('dao/EstadoDAO');
+            $this->load->model('dao/EstadoDAO');         
 
-            //$estadoDAO = new EstadoDAO();        
-
-            $tabela = $this->EstadoDAO->retrive();//$this->EstadoModel->SelecionaTodos();
+            $tabela = $this->EstadoDAO->retrive();
 
             $dados = array(
                 'titulo'=>'Cadastro de Estados',
                 'tabela'=> $tabela,
                 'pagina'=>'estado/index.php'
             );
+
             $this->load->view('index',$dados);
         }
 
-        public function Novo()
-        {
+        public function formularioNovoEstado()       {
             $dados = array(
                 'titulo' => 'Cadastro de estados',
-                'pagina' => 'estado/novo.php',
+                'pagina' => 'estado/formularioNovoEstado.php',
             );
 
             $this->load->view('index', $dados);
         }
 
-        public function Incluir(){
+        public function incluirNovoEstado(){
            
             $this->load->model('dao/EstadoDAO');
 
-
-            $nome = $this->input->post('nome');
-            $sigla = $this->input->post('sigla');
-
             $estado = array(
-                'nome' => $nome,
-                'sigla' => $sigla
+                'nome' => $this->input->post('nome'),
+                'sigla' => $this->input->post('sigla')
             );
 
             $this->EstadoDAO->create($estado);
 
-            redirect('estadocontroller');
-       
+            redirect('estadocontroller');       
         }
 
-        public function Alterar($codigo){                
+        public function formularioAlterarEstado($codigo){                
             
             $this->load->model("dao/EstadoDAO");
             $where = array('idestado'=>$codigo);
@@ -55,14 +48,14 @@
 
             $dados = array(
                 'titulo'=>'Alteração do Estado',
-                'pagina'=>'estado/alterar.php',
+                'pagina'=>'estado/formularioAlterarEstado.php',
                 'tabela'=> $tabela
             );
 
             $this->load->view('index',$dados);
         }
 
-        public function SalvarAlteracao(){
+        public function atualizarEstado(){
 
             $idestado = $this->input->post('idestado');
             $nome = $this->input->post('nome');
@@ -82,7 +75,15 @@
             redirect('estadocontroller');
         }
 
-    }
+        public function deletarEstado($codigo){
+            
+           $where = array('idestado' => $codigo);
 
-    
-?>
+            $this->load->model('dao/EstadoDAO');
+
+            $this->EstadoDAO->delete($where);
+
+            redirect('estadocontroller');
+        }
+
+    }

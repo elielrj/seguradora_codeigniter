@@ -1,6 +1,6 @@
 <?php
 echo $titulo;
-echo form_open('estadocontroller/salvaralteracao');
+echo form_open('estadocontroller/atualizarEstado');
 ?>
 
 <input type='hidden' name='idestado' value="<?php echo $tabela->idestado ?>" />

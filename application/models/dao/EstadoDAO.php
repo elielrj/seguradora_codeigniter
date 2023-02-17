@@ -4,6 +4,19 @@
 
     class EstadoDAO extends CI_Model{
 
+        public function create($estado)
+        {
+            $this->db->insert('estado', $estado);
+            return;
+        }
+
+        public function update($where, $estado)
+        {
+            $this->db->update('estado', $estado, $where);
+
+            return;
+        }
+
         public function retrive(){
 
             $retorno = $this->db->get('estado',100);
@@ -25,18 +38,11 @@
                 $estadoModel = new EstadoModel($linha->idestado, $linha->nome, $linha->sigla);
                 return $estadoModel;
             }
-        }
+        }      
 
-        public function update($where, $estado){
-            $this->db->update('estado', $estado, $where);
-
+        public function delete($where)
+        {
+            $this->db->delete('estado',$where);
             return;
         }
-
-        public function create($estado){
-            $this->db->insert('estado',$estado);
-            return;
-        }
-
     }
-?>
