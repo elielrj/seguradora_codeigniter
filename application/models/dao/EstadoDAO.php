@@ -33,5 +33,10 @@
             return;
         }
 
+        public function create($estado){
+            $this->db->insert('estado',$estado);
+            return;
+        }
+
     }
 ?>

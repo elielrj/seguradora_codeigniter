@@ -29,8 +29,18 @@
 
         public function Incluir(){
            
-            $this->load->model('bo/EstadoModel');
-            $this->EstadoModel->Novo();
+            $this->load->model('dao/EstadoDAO');
+
+
+            $nome = $this->input->post('nome');
+            $sigla = $this->input->post('sigla');
+
+            $estado = array(
+                'nome' => $nome,
+                'sigla' => $sigla
+            );
+
+            $this->EstadoDAO->create($estado);
 
             redirect('estadocontroller');
        
@@ -63,9 +73,7 @@
                 'sigla'=>$sigla
             );
 
-            $where = array(
-                    'idestado' => $idestado
-                );
+            $where = array('idestado' => $idestado);
 
             $this->load->model('dao/EstadoDAO');
 
