@@ -19,16 +19,12 @@
 
         public function retriveIdEstado($where)
         {
-
             $retorno = $this->db->get_where('estado', $where);
 
-            $estadoModel = new EstadoModel(
-                $retorno->result()->idestado,
-                $retorno->result()->nome,
-                $retorno->result()->sigla);
-
-
-            return $estadoModel;
+            foreach($retorno->result() as $linha){
+                $estadoModel = new EstadoModel($linha->idestado, $linha->nome, $linha->sigla);
+                return $estadoModel;
+            }
         }
 
         public function update($where, $estado){

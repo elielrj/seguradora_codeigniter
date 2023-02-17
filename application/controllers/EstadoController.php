@@ -36,20 +36,17 @@
        
         }
 
-        public function Alterar($codigo){
-
-     
+        public function Alterar($codigo){                
             
             $this->load->model("dao/EstadoDAO");
-
             $where = array('idestado'=>$codigo);
 
-            $estadoModel = $this->EstadoDAO->retriveIdEstado($where);
+            $tabela = $this->EstadoDAO->retriveIdEstado($where);
 
             $dados = array(
                 'titulo'=>'Alteração do Estado',
                 'pagina'=>'estado/alterar.php',
-                'estadoModel'=> $estadoModel
+                'tabela'=> $tabela
             );
 
             $this->load->view('index',$dados);
